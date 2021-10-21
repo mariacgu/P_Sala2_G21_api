@@ -60,8 +60,32 @@ public class Paquete implements Serializable {
         return nombre;
     }
 
+     public String getUbicacion() {
+        return ubicacion;
+    }
+     
+       public int getDuracion() {
+        return (int) duracion;
+    }
+     
+      public String getHorario() {
+        return horario;
+    }
+      
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+    
+       public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+    
+     public void setDuracion(int duracion) {
+        this.duracion = duracion;
+    }
+     
+       public void setHorario(String horario) {
+        this.horario = horario;
     }
 
     public double getPrecio() {
