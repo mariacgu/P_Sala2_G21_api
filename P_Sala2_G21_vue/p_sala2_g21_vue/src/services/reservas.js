@@ -1,5 +1,9 @@
+import axios from "axios";
+
 class ReservaService{
   reservas=[];
+  reservaActual={};
+  url="http://localhost:8000/reserva";
   
   constructor(){
 
@@ -10,8 +14,7 @@ class ReservaService{
         personas:0,
         ninos:0,
         total:0
-
-    };
+   };
 
      this.reservas=[
         
@@ -41,7 +44,20 @@ class ReservaService{
       return this.reservas;
   }
 
+  obtenerPorCliente(){
+    let documento=localStorage.cliente;
+    return axios.get(`${this.url}/cliente/${documento}`)
+  }
+
   obtenerReservaActual(){
     return this.reservaActual;
+  }
+
+  registrar(reserva){
+    return axios.post(`${this.url}`,reserva);
+  }
+
+  eliminar(idr){
+    return axios.delete(`${this.url}/borrar/${idr}`);
   }
 }export default new ReservaService();

@@ -1,63 +1,69 @@
 <template>
-<main>
+
   <div>
-            <h2>Listado de Paquetes</h2>
+
+<h2>Listado de Paquetes</h2>
             <table border="1">
                 <thead>
                     <tr>
-                        <th>CLIENTE</th>
                         <th>PAQUETE</th>
-                        <th>NIÑOS</th>
-                        <th>ADULTOS</th>
-                        <th>TOTAL</th>
+                        <th>Precio</th>
+                        <th>horario</th>
+                        <th>ubicacion</th>
                     </tr>
                 </thead>
-                <tbody id="datos_reserva">
-                    <tr v-for="unReserva,i  in listaReservas" :key="unReserva">
-                        <td>{{unReserva.cliente}}</td>
-                        <td>{{unReserva.paquete}}</td>
-                        <td>{{unReserva.ninos}}</td>
-                        <td>{{unReserva.personas}}</td>
-                        <td>{{unReserva.total}}</td>
+                <tbody id="datos_paquete">
+                    <tr v-for="unPaquete in listaPaquetes" :key="unPaquete">
+                        <td>{{unPaquete.nombre}}</td>
+                        <td>{{unPaquete.precio}}</td>
+                        <td>{{unPaquete.horario}}</td>
+                        <td>{{unPaquete.ubicacion}}</td>
                         
-             
                     </tr>                 
                 </tbody>
             </table>
-        </div>
+
         
-</main>
+  </div>
+
 
 </template>
 
 <script>
 
-import ReservaService from "@/services/reservas.js"
+
+import PaqueteService from "@/services/paquetes.js"
 
 export default {
     mounted(){
-        document.title="Gestion de Reservas";
-        this.listaReservas=ReservaService.obtenerTodos();
+        document.title="Acerca de";
+        //this.listaReservas=ReservaService.obtenerTodos();
+        PaqueteService.obtenerTodos().then(
+            (respuesta)=>{
+                console.log(respuesta.data);
+                this.listaPaquetes=respuesta.data;
+            }
+        ).catch(
+              (error)=>{
+
+              }  
+        
+        )
     },
     title:"prueba",
   data(){
       return{
         titulo:"Gestion de reservas",
-        listaPaquetes : ["Sierra Nevada", "Nevado del Ruiz","Salamina","Parque Natural Chicaque","Bioparque La Reserva"],
-        listaPrecios : [300000, 400000,140000,120000,130000],
-
-        listaReservas:[],
-       
+        //listaPaquetes : ["Sierra Nevada", "Nevado del Ruiz","Salamina","Parque Natural Chicaque","Bioparque La Reserva"],
+        listaPaquetes: [],
+               
               };
   },
-  name: 'Reserva',
+  name: 'Paquete',
   components: {
    
   },
   methods:{
-
-      
-
 
   }
 }

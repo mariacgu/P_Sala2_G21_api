@@ -1,5 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
+import Reserva from '../views/Reserva.vue'
+import Login from  '@/views/Login.vue'
+import isAutenticado  from './auth'
+import isAutenticadop  from './authp'
 
 const routes = [
   {
@@ -10,12 +14,34 @@ const routes = [
   {
     path: '/reserva',
     name: 'Reserva',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Reserva.vue')
+    component: Reserva,
+    beforeEnter: [isAutenticado]
+    
+  },
+
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+    
+  },
+  {
+    path: '/paquete',
+    name: 'Paquete',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Paquete.vue'),
+    beforeEnter: [isAutenticadop]
+  },
+  {
+    path: '/cliente',
+    name: 'Cliente',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Cliente.vue'),
+    beforeEnter: [isAutenticadop]
   },
   {
     path: '/costa',
     name: 'Costa',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Costa.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Costa.vue'),
+    beforeEnter: [isAutenticado]
   },
   {
     path: '/boyaca',
@@ -37,11 +63,7 @@ const routes = [
     name: 'Santander',
     component: () => import(/* webpackChunkName: "about" */ '../views/Cundinamarca.vue')
   },
-  {
-    path: '/login',
-    name: 'Login',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
-  },
+
   {
     path: '/about',
     name: 'About',

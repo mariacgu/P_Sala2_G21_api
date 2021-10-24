@@ -10,18 +10,23 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rancho&effect=shadow-multiple">
   <div class="topnav" id="myTopnav">
-    <router-link to="/">Home</router-link> |
-    <div class="dropdown">
-    <button class="dropbtn">Reservas  <i class="fa fa-caret-down"></i> </button>
+    <router-link to="/">Home</router-link> 
+    <div  class="dropdown">
+    <button class="dropbtn">Operacion <i class="fa fa-caret-down"></i> </button>
     <div class="dropdown-content">
       <router-link to="/reserva">Reserva</router-link>
-      <router-link to="/cliente">Listado</router-link>
+      <router-link to="/paquete">Paquete</router-link>
+       <router-link to="/cliente">Cliente</router-link>
       
     </div>
   </div> 
      
     <router-link to="/about">About</router-link>
-    <router-link to="/login">Iniciar Session</router-link>
+    <router-link to="/login">Log in</router-link>
+    <a v-if="id" @click.prevent="cerrarSesion" href="#">Log out</a>
+    <h3 >user: {{un}}</h3>
+
+    
     <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
   
   </div>
@@ -29,6 +34,26 @@
 </template>
 
 <script>
+export default{
+  mounted(){
+    this.id=localStorage.cliente
+    this.un=localStorage.usuario
+   
+  },
+  data(){
+    return{
+      id:-1,
+      un:""
+    }
+  },
+  methods:{
+    cerrarSesion(){
+      localStorage.clear();
+      this.$router.go();
+    }
+  }
+}
+
 function myFunction() {
   var x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
@@ -55,6 +80,12 @@ h1{
 	color: #192954;
     font-size: 30px;
     text-shadow: 4px 4px 4px #aaa;
+}
+h3{
+  color: whitesmoke;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-weight: normal;
+  font-size: 14px;;
 }
 
 #logo {
